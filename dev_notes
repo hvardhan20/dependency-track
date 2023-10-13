@@ -1,0 +1,6 @@
+mvn jetty:run -P enhance -D"logback.configurationFile=src/main/docker/logback.xml" -D"alpine.application.properties=application.properties"
+
+
+docker run --restart always --network dtrack_net -p 5432:5432 -v .\pg_data:/var/lib/postgresql/data --name pg -e POSTGRES_PASSWORD=password -d postgres
+
+docker run --restart always --network dtrack_net -v pgadmin_lib:/var/lib/pgadmin -v pgadmin_servers:/pgadmin4/servers.json -p 80:80 -e PGADMIN_DEFAULT_EMAIL=harsha@harsha.com -e PGADMIN_DEFAULT_PASSWORD=password -d dpage/pgadmin4
